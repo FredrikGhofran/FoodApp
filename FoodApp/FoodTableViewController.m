@@ -9,8 +9,9 @@
 #import "FoodTableViewController.h"
 #import "FoodTableViewCell.h"
 @interface FoodTableViewController ()
-@property(nonatomic)NSArray *food;
-@property(nonatomic)NSArray *energi;
+@property(nonatomic)NSMutableArray *food;
+@property(nonatomic)NSMutableArray *energi;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -28,10 +29,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.energi = @[@"69 kcal",@"77 kcal"];
-    self.food = @[@"Korv",@"Kyckling"];
+    self.searchBar.delegate = self;
+    self.energi = [@[]mutableCopy];
+    self.food = [@[]mutableCopy];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -50,7 +52,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 2;
+    return self.food.count;
 }
 
 
@@ -64,6 +66,61 @@
     return cell;
 }
 
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchbar
+{
+    self.energi = [@[]mutableCopy];
+    self.food = [@[]mutableCopy];
+    [self.tableView endEditing:YES];
+    NSString *urlString = [NSString stringWithFormat:@"http://matapi.se/foodstuff?query=%@",self.searchBar.text];
+    
+    
+    NSURL *URL = [NSURL URLWithString:urlString];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSError *parseError;
+      //  NSLog(@"Data: %@", data);
+        NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&parseError];
+        //NSLog(@"request is done ! Json: %@",json);
+        dispatch_async(dispatch_get_main_queue(),^{
+            
+            for(int i =0;i<json.count;i++){
+            
+                [self.food addObject:json[i][@"name"]];
+                
+               
+                NSString *urlString = [NSString stringWithFormat:@"http://matapi.se/foodstuff/%@",json[i][@"number"]];
+                 NSURL *URL = [NSURL URLWithString:urlString];
+                NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+                NSLog(@"11111111111111");
+                NSURLSession *session = [NSURLSession sharedSession];
+                NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    NSLog(@"2222222222222");
+
+                    NSError *parseError;
+                   // NSLog(@"Data: %@", data);
+                    NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&parseError];
+                   // NSLog(@"request is done ! Json: %@",json);
+                    NSNumber *energi = json[2][@"energyKcal"];
+                    NSLog(@"ENERGI: %@ !!!!!!!!!!",energi);
+                    [self.energi addObject:[NSString stringWithFormat:@"%@",energi]];
+                }];
+                 [task resume];
+                
+            }
+            
+
+           [self.tableView reloadData];
+         
+        });
+        
+    }];
+    
+    [task resume];
+}
 
 /*
 // Override to support conditional editing of the table view.
