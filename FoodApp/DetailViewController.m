@@ -9,7 +9,12 @@
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *foodNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *carbsValueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *proteinValueLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *fatValueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *energiValueLabel;
 @end
 
 @implementation DetailViewController
@@ -26,7 +31,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.foodNameLabel.text =self.foodName;
+    self.carbsValueLabel.text = self.carbsValue;
+    self.proteinValueLabel.text = self.proteinValue;
+    self.fatValueLabel.text = self.fatValue;
+    self.energiValueLabel.text = self.energiValue;
 }
 
 - (void)didReceiveMemoryWarning

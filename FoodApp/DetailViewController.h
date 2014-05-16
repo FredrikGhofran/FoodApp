@@ -9,5 +9,9 @@
 #import "ViewController.h"
 
 @interface DetailViewController : ViewController
-
+@property(nonatomic)NSString *foodName;
+@property(nonatomic)NSString *carbsValue;
+@property(nonatomic)NSString *proteinValue;
+@property(nonatomic)NSString *fatValue;
+@property(nonatomic)NSString *energiValue;
 @end

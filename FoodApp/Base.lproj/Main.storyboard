@@ -182,6 +182,13 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <connections>
+                        <outlet property="carbsValueLabel" destination="CaD-tg-5bg" id="1SH-l0-5x7"/>
+                        <outlet property="energiValueLabel" destination="Pj5-0d-AzX" id="cqG-LB-srT"/>
+                        <outlet property="fatValueLabel" destination="91V-Jy-1xP" id="scg-la-j6R"/>
+                        <outlet property="foodNameLabel" destination="Ra3-v1-3Lv" id="bOo-Dc-6UN"/>
+                        <outlet property="proteinValueLabel" destination="Yaf-gU-ahk" id="IQG-UT-QEN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tyc-N9-aGX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
