@@ -42,6 +42,10 @@
     self.foodDictionary = [[NSMutableDictionary alloc] init];
     self.foodValuesDictionary =[[NSMutableDictionary alloc] init];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.tableView reloadData];
+}
 
 
 - (void)didReceiveMemoryWarning

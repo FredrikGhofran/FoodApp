@@ -27,7 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -35,10 +35,9 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning
+-(void)viewWillAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source

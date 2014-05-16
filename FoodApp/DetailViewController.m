@@ -43,7 +43,7 @@
     self.energiValueLabel.text = self.energiValue;
 }
 - (IBAction)saveButtonClick:(id)sender {
-        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"Save food?" message:@"Do you wont to save your food to favorites?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"Save food" message:@"Do you wont to save your food to favorites?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
     [alertView show];
     
 
@@ -53,14 +53,22 @@
     if(buttonIndex ==0){
         NSLog(@"no");
     }else if(buttonIndex == 1){
-        NSLog(@"yes");
-        NSInteger number =[[Database foodList] integerForKey:@"countNr"];
-        NSArray *food = @[self.foodNameLabel.text,self.proteinValueLabel.text,self.carbsValueLabel.text,self.fatValueLabel.text,self.energiValueLabel.text];
-        number++;
-        [[Database foodList]  setObject:food forKey:[NSString stringWithFormat:@"%d",number]];
-        [[Database foodList]  setInteger:number forKey:@"countNr"];
-        [[Database foodList] synchronize];
-        NSLog(@"%d",[[Database foodList]  integerForKey:@"countNr"]);
+        if([self.energiValueLabel.text isEqualToString:@"Not found"]){
+            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"Try again" message:@"Your energi value was not found,please try to go back to the search view an reaload!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alertView show];
+            
+        }else{
+            NSLog(@"yes");
+            NSInteger number =[[Database foodList] integerForKey:@"countNr"];
+            NSArray *food = @[self.foodNameLabel.text,self.proteinValueLabel.text,self.carbsValueLabel.text,self.fatValueLabel.text,self.energiValueLabel.text];
+            number++;
+            [[Database foodList]  setObject:food forKey:[NSString stringWithFormat:@"%d",number]];
+            [[Database foodList]  setInteger:number forKey:@"countNr"];
+            [[Database foodList] synchronize];
+            NSLog(@"%d",[[Database foodList]  integerForKey:@"countNr"]);
+        
+        }
+  
 
     }
 }
