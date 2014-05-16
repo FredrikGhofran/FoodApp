@@ -31,10 +31,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"Detail View protein :%@",self.proteinValue);
+    NSLog(@"Detail View fat :%@",self.fatValue);
+
+    NSLog(@"Detail View carbsValue :%@",self.carbsValue);
+
     self.foodNameLabel.text =self.foodName;
-    self.carbsValueLabel.text = self.carbsValue;
-    self.proteinValueLabel.text = self.proteinValue;
-    self.fatValueLabel.text = self.fatValue;
+    self.carbsValueLabel.text = [NSString stringWithFormat:@"%@",self.carbsValue];
+    self.proteinValueLabel.text = [NSString stringWithFormat:@"%@",self.proteinValue];
+    self.fatValueLabel.text = [NSString stringWithFormat:@"%@",self.fatValue];
     self.energiValueLabel.text = self.energiValue;
 }
 

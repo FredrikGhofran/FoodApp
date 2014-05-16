@@ -13,6 +13,8 @@
 @property(nonatomic)NSMutableArray *food;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property(nonatomic)NSMutableDictionary *foodDictionary;
+@property(nonatomic)NSMutableDictionary *foodValuesDictionary;
+
 
 @end
 
@@ -30,9 +32,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+  
     self.searchBar.delegate = self;
     self.food = [@[]mutableCopy];
     self.foodDictionary = [[NSMutableDictionary alloc] init];
+    self.foodValuesDictionary =[[NSMutableDictionary alloc] init];
 }
 
 
@@ -91,16 +95,16 @@
     
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSError *parseError;
-        //  NSLog(@"Data: %@", data);
+
         NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&parseError];
-        NSLog(@"JSON FOOD OBJECTS: %@",json);
+
         dispatch_async(dispatch_get_main_queue(),^{
             
             for(int i =0;i<json.count;i++){
                 
                 [self.food addObject:json[i][@"name"]];
-                NSLog(@"added food");
-               
+
+                
                 NSString *urlString = [NSString stringWithFormat:@"http://matapi.se/foodstuff/%@",json[i][@"number"]];
                 NSURL *URL = [NSURL URLWithString:urlString];
                 NSURLRequest *request = [NSURLRequest requestWithURL:URL];
@@ -110,15 +114,18 @@
                 NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
                     NSError *parseError;
-                    // NSLog(@"Data: %@", data);
+
                     NSDictionary *foodObject = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&parseError];
-                    NSLog(@"ONE JSON FOOD OBJECT: %@",foodObject);
+
                     NSNumber *energi = foodObject[@"nutrientValues"][@"energyKcal"];
-                    NSLog(@"ENERGI :%@",energi);
-                        NSLog(@"my dictionary: %@",self.foodDictionary);
-                        [self.foodDictionary setValue:[NSString stringWithFormat:@"%@",energi] forKey:self.food[i]];
-                    
-                     NSLog(@"added ENERGI");
+
+                    [self.foodDictionary setValue:[NSString stringWithFormat:@"%@",energi] forKey:self.food[i]];
+                    [self.foodValuesDictionary setValue:@[foodObject[@"nutrientValues"][@"protein"],foodObject[@"nutrientValues"][@"carbohydrates"],foodObject[@"nutrientValues"][@"fat"]] forKey:json[i][@"name"]];
+                    /*
+                    NSLog(@"%@, protein :%@",json[i][@"name"],self.values[json[i][@"name"]][0]);
+                    NSLog(@"%@, carbs :%@",json[i][@"name"],self.values[json[i][@"name"]][1]);
+                    NSLog(@"%@, fat :%@",json[i][@"name"],self.values[json[i][@"name"]][2]);*/
+
                 }];
                 [task resume];
                 
@@ -178,28 +185,17 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(FoodTableViewCell *)sender
 {
     DetailViewController *detailViewController = [segue destinationViewController];
-    detailViewController.foodName = sender.foodNameTextLabel.text;
-    NSLog(@"%@",sender.foodNameTextLabel.text);
-    NSString *urlString = [NSString stringWithFormat:@"http://matapi.se/foodstuff/%@",sender.foodNameTextLabel.text];
-    NSURL *URL = [NSURL URLWithString:urlString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    NSURLSession *session = [NSURLSession sharedSession];
     
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
-        NSError *parseError;
-        NSLog(@"Data: %@", data);
-        NSDictionary *foodObject = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&parseError];
-        
-        NSNumber *energi = foodObject[@"nutrientValues"][@"energyKcal"];
-        NSNumber *protein = foodObject[@"nutrientValues"][@"protein"];
-        NSNumber *carbohydrates = foodObject[@"nutrientValues"][@"carbohydrates"];
-        NSNumber *fat = foodObject[@"nutrientValues"][@"fat"];
-        NSLog(@"%@",foodObject);
-        NSLog(@"%@",protein);
-        detailViewController.proteinValue = [NSString stringWithFormat:@"%@",protein];
-    }];
-    [task resume];
+    detailViewController.foodName = sender.foodNameTextLabel.text;
+   /* NSLog(@"%@ protein: %@",sender.foodNameTextLabel.text,self.values[sender.foodNameTextLabel.text][0]);
+    NSLog(@"%@ carbs: %@",sender.foodNameTextLabel.text,self.values[sender.foodNameTextLabel.text][1]);
+    NSLog(@"%@ fat: %@",sender.foodNameTextLabel.text,self.values[sender.foodNameTextLabel.text][2]);
+    0x8e87040*/
+
+    detailViewController.energiValue = sender.foodEnergiTextLabel.text;
+    detailViewController.proteinValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][0];
+    detailViewController.carbsValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][1];
+    detailViewController.fatValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][2];
 
 }
 

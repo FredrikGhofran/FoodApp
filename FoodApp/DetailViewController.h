@@ -10,8 +10,8 @@
 
 @interface DetailViewController : ViewController
 @property(nonatomic)NSString *foodName;
-@property(nonatomic)NSString *carbsValue;
-@property(nonatomic)NSString *proteinValue;
-@property(nonatomic)NSString *fatValue;
+@property(nonatomic)NSNumber *carbsValue;
+@property(nonatomic)NSNumber *proteinValue;
+@property(nonatomic)NSNumber *fatValue;
 @property(nonatomic)NSString *energiValue;
 @end
