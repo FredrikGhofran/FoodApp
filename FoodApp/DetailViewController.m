@@ -7,12 +7,12 @@
 //
 
 #import "DetailViewController.h"
-
+#import "FavoriteTableViewController.h"
+#import "Database.h"
 @interface DetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *foodNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *carbsValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *proteinValueLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *fatValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *energiValueLabel;
 @end
@@ -42,22 +42,28 @@
     self.fatValueLabel.text = [NSString stringWithFormat:@"%@",self.fatValue];
     self.energiValueLabel.text = self.energiValue;
 }
+- (IBAction)saveButtonClick:(id)sender {
+        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"Save food?" message:@"Do you wont to save your food to favorites?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    [alertView show];
+    
 
-- (void)didReceiveMemoryWarning
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    if(buttonIndex ==0){
+        NSLog(@"no");
+    }else if(buttonIndex == 1){
+        NSLog(@"yes");
+        NSInteger number =[[Database foodList] integerForKey:@"countNr"];
+        NSArray *food = @[self.foodNameLabel.text,self.proteinValueLabel.text,self.carbsValueLabel.text,self.fatValueLabel.text,self.energiValueLabel.text];
+        number++;
+        [[Database foodList]  setObject:food forKey:[NSString stringWithFormat:@"%d",number]];
+        [[Database foodList]  setInteger:number forKey:@"countNr"];
+        [[Database foodList] synchronize];
+        NSLog(@"%d",[[Database foodList]  integerForKey:@"countNr"]);
+
+    }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

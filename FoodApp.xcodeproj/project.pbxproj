@@ -24,6 +24,8 @@
 		45148C7A191A73BB0024DB40 /* FoodTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45148C79191A73BB0024DB40 /* FoodTableViewController.m */; };
 		45148C7D191A77250024DB40 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45148C7C191A77250024DB40 /* DetailViewController.m */; };
 		45148C80191A7C290024DB40 /* FoodTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45148C7F191A7C290024DB40 /* FoodTableViewCell.m */; };
+		4549FFD01926912D0051FB56 /* FavoriteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4549FFCF1926912D0051FB56 /* FavoriteTableViewController.m */; };
+		4549FFD31926C5010051FB56 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 4549FFD21926C5010051FB56 /* Database.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,10 @@
 		45148C7C191A77250024DB40 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		45148C7E191A7C290024DB40 /* FoodTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTableViewCell.h; sourceTree = "<group>"; };
 		45148C7F191A7C290024DB40 /* FoodTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodTableViewCell.m; sourceTree = "<group>"; };
+		4549FFCE1926912D0051FB56 /* FavoriteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteTableViewController.h; sourceTree = "<group>"; };
+		4549FFCF1926912D0051FB56 /* FavoriteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteTableViewController.m; sourceTree = "<group>"; };
+		4549FFD11926C5010051FB56 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
+		4549FFD21926C5010051FB56 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,12 +130,16 @@
 				45148C52191A73340024DB40 /* AppDelegate.h */,
 				45148C53191A73340024DB40 /* AppDelegate.m */,
 				45148C55191A73340024DB40 /* Main.storyboard */,
+				4549FFCE1926912D0051FB56 /* FavoriteTableViewController.h */,
+				4549FFCF1926912D0051FB56 /* FavoriteTableViewController.m */,
 				45148C78191A73BB0024DB40 /* FoodTableViewController.h */,
 				45148C79191A73BB0024DB40 /* FoodTableViewController.m */,
 				45148C7E191A7C290024DB40 /* FoodTableViewCell.h */,
 				45148C7F191A7C290024DB40 /* FoodTableViewCell.m */,
 				45148C7B191A77250024DB40 /* DetailViewController.h */,
 				45148C7C191A77250024DB40 /* DetailViewController.m */,
+				4549FFD11926C5010051FB56 /* Database.h */,
+				4549FFD21926C5010051FB56 /* Database.m */,
 				45148C58191A73340024DB40 /* ViewController.h */,
 				45148C59191A73340024DB40 /* ViewController.m */,
 				45148C5B191A73340024DB40 /* Images.xcassets */,
@@ -266,8 +276,10 @@
 			files = (
 				45148C7D191A77250024DB40 /* DetailViewController.m in Sources */,
 				45148C5A191A73340024DB40 /* ViewController.m in Sources */,
+				4549FFD31926C5010051FB56 /* Database.m in Sources */,
 				45148C54191A73340024DB40 /* AppDelegate.m in Sources */,
 				45148C80191A7C290024DB40 /* FoodTableViewCell.m in Sources */,
+				4549FFD01926912D0051FB56 /* FavoriteTableViewController.m in Sources */,
 				45148C50191A73340024DB40 /* main.m in Sources */,
 				45148C7A191A73BB0024DB40 /* FoodTableViewController.m in Sources */,
 			);
@@ -474,6 +486,7 @@
 				45148C74191A73340024DB40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		45148C75191A73340024DB40 /* Build configuration list for PBXNativeTarget "FoodAppTests" */ = {
 			isa = XCConfigurationList;
@@ -482,6 +495,7 @@
 				45148C77191A73340024DB40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

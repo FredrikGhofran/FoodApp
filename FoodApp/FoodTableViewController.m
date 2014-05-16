@@ -31,8 +31,12 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-  
+    /*
+    KOD FÖR ATT RENSA DATABASEN
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    [super viewDidLoad];  */
+    
     self.searchBar.delegate = self;
     self.food = [@[]mutableCopy];
     self.foodDictionary = [[NSMutableDictionary alloc] init];
@@ -76,12 +80,14 @@
         cell.foodEnergiTextLabel.text =@"Loading...";
 
     }
-
+    
     return cell;
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchbar
 {
+    self.foodDictionary = [[NSMutableDictionary alloc] init];
+    self.foodValuesDictionary =[[NSMutableDictionary alloc] init];
     self.food = [@[]mutableCopy];
     [self.tableView endEditing:YES];
     NSString *urlString = [NSString stringWithFormat:@"http://matapi.se/foodstuff?query=%@",self.searchBar.text];
@@ -121,6 +127,8 @@
 
                     [self.foodDictionary setValue:[NSString stringWithFormat:@"%@",energi] forKey:self.food[i]];
                     [self.foodValuesDictionary setValue:@[foodObject[@"nutrientValues"][@"protein"],foodObject[@"nutrientValues"][@"carbohydrates"],foodObject[@"nutrientValues"][@"fat"]] forKey:json[i][@"name"]];
+                    NSLog(@"%@, protein :%@",json[i][@"name"],energi);
+                    
                     /*
                     NSLog(@"%@, protein :%@",json[i][@"name"],self.values[json[i][@"name"]][0]);
                     NSLog(@"%@, carbs :%@",json[i][@"name"],self.values[json[i][@"name"]][1]);
@@ -192,7 +200,12 @@
     NSLog(@"%@ fat: %@",sender.foodNameTextLabel.text,self.values[sender.foodNameTextLabel.text][2]);
     0x8e87040*/
 
-    detailViewController.energiValue = sender.foodEnergiTextLabel.text;
+    if([sender.foodEnergiTextLabel.text isEqualToString:@"Loading..."]){
+        detailViewController.energiValue = @"Not found";
+    }else{
+        detailViewController.energiValue = sender.foodEnergiTextLabel.text;
+
+    }
     detailViewController.proteinValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][0];
     detailViewController.carbsValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][1];
     detailViewController.fatValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][2];

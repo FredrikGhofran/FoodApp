@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface DetailViewController : ViewController
+@interface DetailViewController : ViewController<UIAlertViewDelegate>
 @property(nonatomic)NSString *foodName;
 @property(nonatomic)NSNumber *carbsValue;
 @property(nonatomic)NSNumber *proteinValue;
