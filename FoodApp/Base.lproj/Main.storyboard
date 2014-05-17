@@ -196,7 +196,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tyc-N9-aGX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2659" y="-2"/>
+            <point key="canvasLocation" x="2393" y="552"/>
         </scene>
         <!--Favorite Table View Controller - Favorite list-->
         <scene sceneID="WBf-gX-66d">
@@ -207,11 +207,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="79" id="naS-to-qz1" customClass="FoodTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="79" id="naS-to-qz1" customClass="FoodTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="79"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="naS-to-qz1" id="N7c-U1-3Pi">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="78"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3w-kI-cGU">
@@ -232,6 +232,7 @@
                                 <connections>
                                     <outlet property="foodEnergiTextLabel" destination="5nh-th-fGV" id="kB0-ZS-DYD"/>
                                     <outlet property="foodNameTextLabel" destination="x3w-kI-cGU" id="m0X-oq-N2K"/>
+                                    <segue destination="1ya-xa-pgS" kind="push" id="NBX-Lp-Cio"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -309,4 +310,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="NBX-Lp-Cio"/>
+    </inferredMetricsTieBreakers>
 </document>
