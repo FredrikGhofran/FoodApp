@@ -9,6 +9,7 @@
 #import "FoodTableViewController.h"
 #import "FoodTableViewCell.h"
 #import "DetailViewController.h"
+#import "FavoriteDetailViewController.h"
 @interface FoodTableViewController ()
 @property(nonatomic)NSMutableArray *food;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -196,23 +197,23 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(FoodTableViewCell *)sender
 {
-    DetailViewController *detailViewController = [segue destinationViewController];
+    FavoriteDetailViewController *favoriteDetailViewController = [segue destinationViewController];
     
-    detailViewController.foodName = sender.foodNameTextLabel.text;
+    favoriteDetailViewController.foodName = sender.foodNameTextLabel.text;
    /* NSLog(@"%@ protein: %@",sender.foodNameTextLabel.text,self.values[sender.foodNameTextLabel.text][0]);
     NSLog(@"%@ carbs: %@",sender.foodNameTextLabel.text,self.values[sender.foodNameTextLabel.text][1]);
     NSLog(@"%@ fat: %@",sender.foodNameTextLabel.text,self.values[sender.foodNameTextLabel.text][2]);
     0x8e87040*/
 
     if([sender.foodEnergiTextLabel.text isEqualToString:@"Loading..."]){
-        detailViewController.energiValue = @"Not found";
+        favoriteDetailViewController.energiValue = @"Not found";
     }else{
-        detailViewController.energiValue = sender.foodEnergiTextLabel.text;
+        favoriteDetailViewController.energiValue = sender.foodEnergiTextLabel.text;
 
     }
-    detailViewController.proteinValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][0];
-    detailViewController.carbsValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][1];
-    detailViewController.fatValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][2];
+    favoriteDetailViewController.proteinValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][0];
+    favoriteDetailViewController.carbsValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][1];
+    favoriteDetailViewController.fatValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][2];
 
 }
 
