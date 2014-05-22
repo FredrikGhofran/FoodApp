@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property(nonatomic)NSMutableDictionary *foodDictionary;
 @property(nonatomic)NSMutableDictionary *foodValuesDictionary;
+//@property(nonatomic)NSMutableArray *searchResult;
+//@property(nonatomic)NSArray *showResult;
 
 
 @end
@@ -32,12 +34,14 @@
 
 - (void)viewDidLoad
 {
-    /*
-    KOD FÖR ATT RENSA DATABASEN
-    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-    [super viewDidLoad];  */
     
+//   // KOD FÖR ATT RENSA DATABASEN
+//    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+//    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+//    [super viewDidLoad];
+    
+//    self.showResult = @[];
+//    self.searchResult = [@[]mutableCopy];
     self.searchBar.delegate = self;
     self.food = [@[]mutableCopy];
     self.foodDictionary = [[NSMutableDictionary alloc] init];
@@ -79,7 +83,7 @@
 
     if([self.foodDictionary valueForKey:cell.foodNameTextLabel.text]){
 
-        cell.foodEnergiTextLabel.text =[self.foodDictionary valueForKey:cell.foodNameTextLabel.text];
+        cell.foodEnergiTextLabel.text =[NSString stringWithFormat:@"%@ kcal",[self.foodDictionary valueForKey:cell.foodNameTextLabel.text]];
     }
     else{
         cell.foodEnergiTextLabel.text =@"Loading...";
@@ -123,7 +127,7 @@
                 NSURLSession *session = [NSURLSession sharedSession];
                 
                 NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-
+                    
                     NSError *parseError;
 
                     NSDictionary *foodObject = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&parseError];
@@ -208,7 +212,8 @@
     if([sender.foodEnergiTextLabel.text isEqualToString:@"Loading..."]){
         favoriteDetailViewController.energiValue = @"Not found";
     }else{
-        favoriteDetailViewController.energiValue = sender.foodEnergiTextLabel.text;
+        favoriteDetailViewController.energiValue = [self.foodDictionary objectForKey:sender.foodNameTextLabel.text];
+        
 
     }
     favoriteDetailViewController.proteinValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][0];
@@ -216,6 +221,41 @@
     favoriteDetailViewController.fatValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][2];
 
 }
+//-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+//{
+//    NSString *urlString = @"http://matapi.se/foodstuff?query=";
+//    
+//    
+//    NSURL *URL = [NSURL URLWithString:urlString];
+//    
+//    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+//    
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    
+//    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        NSError *parseError;
+//        
+//        NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&parseError];
+//        
+//        dispatch_async(dispatch_get_main_queue(),^{
+//            for(int i =0;i<json.count;i++){
+//                
+//                [self.searchResult addObject:json[i][@"name"]];
+//           
+//            }
+//        });
+//        
+//    }];
+//    
+//    [task resume];
+//    
+//    
+//    NSPredicate *searchPredicate =[NSPredicate predicateWithFormat:@"description contains[c] %@",searchString];
+//    
+//    self.showResult = [self.searchResult filteredArrayUsingPredicate:searchPredicate];
+//    
+//    return YES;
+//}
 
 
 @end

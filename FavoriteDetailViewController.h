@@ -6,9 +6,7 @@
 //  Copyright (c) 2014 Fredrik Ghofran. All rights reserved.
 //
 
-#import "ViewController.h"
-
-@interface FavoriteDetailViewController : ViewController
+@interface FavoriteDetailViewController : UIViewController
 @property(nonatomic)NSString *foodName;
 @property(nonatomic)NSNumber *carbsValue;
 @property(nonatomic)NSNumber *proteinValue;

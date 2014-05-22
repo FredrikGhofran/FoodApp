@@ -15,6 +15,7 @@ static NSUserDefaults * _foodList;
 {
     if(!_foodList){
         _foodList = [NSUserDefaults standardUserDefaults];
+        
     }
     return _foodList;
 }

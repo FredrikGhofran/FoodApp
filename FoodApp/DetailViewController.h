@@ -6,9 +6,8 @@
 //  Copyright (c) 2014 Fredrik Ghofran. All rights reserved.
 //
 
-#import "ViewController.h"
 
-@interface DetailViewController : ViewController<UIAlertViewDelegate>
+@interface DetailViewController : UIViewController<UIAlertViewDelegate>
 @property(nonatomic)NSString *foodName;
 @property(nonatomic)NSNumber *carbsValue;
 @property(nonatomic)NSNumber *proteinValue;

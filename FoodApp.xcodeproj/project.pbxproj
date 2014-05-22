@@ -14,7 +14,6 @@
 		45148C50191A73340024DB40 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 45148C4F191A73340024DB40 /* main.m */; };
 		45148C54191A73340024DB40 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 45148C53191A73340024DB40 /* AppDelegate.m */; };
 		45148C57191A73340024DB40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45148C55191A73340024DB40 /* Main.storyboard */; };
-		45148C5A191A73340024DB40 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45148C59191A73340024DB40 /* ViewController.m */; };
 		45148C5C191A73340024DB40 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45148C5B191A73340024DB40 /* Images.xcassets */; };
 		45148C63191A73340024DB40 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45148C62191A73340024DB40 /* XCTest.framework */; };
 		45148C64191A73340024DB40 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45148C43191A73340024DB40 /* Foundation.framework */; };
@@ -51,8 +50,6 @@
 		45148C52191A73340024DB40 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		45148C53191A73340024DB40 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		45148C56191A73340024DB40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		45148C58191A73340024DB40 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		45148C59191A73340024DB40 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		45148C5B191A73340024DB40 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		45148C61191A73340024DB40 /* FoodAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45148C62191A73340024DB40 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -145,8 +142,6 @@
 				45148C7C191A77250024DB40 /* DetailViewController.m */,
 				4549FFD11926C5010051FB56 /* Database.h */,
 				4549FFD21926C5010051FB56 /* Database.m */,
-				45148C58191A73340024DB40 /* ViewController.h */,
-				45148C59191A73340024DB40 /* ViewController.m */,
 				45148C5B191A73340024DB40 /* Images.xcassets */,
 				45148C4A191A73340024DB40 /* Supporting Files */,
 			);
@@ -280,7 +275,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				45148C7D191A77250024DB40 /* DetailViewController.m in Sources */,
-				45148C5A191A73340024DB40 /* ViewController.m in Sources */,
 				4549FFD31926C5010051FB56 /* Database.m in Sources */,
 				45148C54191A73340024DB40 /* AppDelegate.m in Sources */,
 				4549FFD9192784720051FB56 /* FavoriteDetailViewController.m in Sources */,

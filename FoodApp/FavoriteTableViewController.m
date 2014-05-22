@@ -52,7 +52,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[Database foodList] integerForKey:@"countNr"];
+    NSMutableArray *favoriteFoods = [[Database foodList] objectForKey:@"favorites"];
+    return favoriteFoods.count;
 }
 
 
@@ -60,9 +61,8 @@
 {
     FoodTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    cell.foodNameTextLabel.text = [[Database foodList]  objectForKey:[NSString stringWithFormat:@"%d",indexPath.row+1]][0];
-    cell.foodEnergiTextLabel.text = [[Database foodList]  objectForKey:[NSString stringWithFormat:@"%d",indexPath.row+1]][4];
-
+    cell.foodNameTextLabel.text = [[Database foodList]  objectForKey:@"favorites"][indexPath.row][0];
+    cell.foodEnergiTextLabel.text =[NSString stringWithFormat:@"%@ kcal", [[Database foodList] objectForKey:@"favorites"][indexPath.row][4]];
     return cell;
 }
 
@@ -111,13 +111,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(FoodTableViewCell*)sender
 {
     DetailViewController *detailViewController = [segue destinationViewController];
-    NSInteger key = [self.tableView indexPathForCell:sender].row+1;
-    detailViewController.foodName = [[Database foodList] objectForKey:[NSString stringWithFormat:@"%d",key]][0];
-    detailViewController.proteinValue = [[Database foodList] objectForKey:[NSString stringWithFormat:@"%d",key]][1];
-    detailViewController.carbsValue = [[Database foodList] objectForKey:[NSString stringWithFormat:@"%d",key]][2];
-    detailViewController.fatValue = [[Database foodList] objectForKey:[NSString stringWithFormat:@"%d",key]][3];
-    detailViewController.energiValue = [[Database foodList] objectForKey:[NSString stringWithFormat:@"%d",key]][4];
-
+    NSInteger key = [self.tableView indexPathForCell:sender].row;
+    detailViewController.foodName = [[Database foodList] objectForKey:@"favorites"][key][0];
+    detailViewController.foodName = [[Database foodList] objectForKey:@"favorites"][key][1];
+    detailViewController.foodName = [[Database foodList] objectForKey:@"favorites"][key][2];
+    detailViewController.foodName = [[Database foodList] objectForKey:@"favorites"][key][3];
+    detailViewController.foodName = [[Database foodList] objectForKey:@"favorites"][key][4];
 
 
 }

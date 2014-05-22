@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *proteinValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fatValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *energiValueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *savedLabel;
 @end
 
 @implementation DetailViewController
@@ -31,11 +32,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"Detail View protein :%@",self.proteinValue);
-    NSLog(@"Detail View fat :%@",self.fatValue);
 
-    NSLog(@"Detail View carbsValue :%@",self.carbsValue);
-
+    [self labelAmination];
+    
     self.foodNameLabel.text =self.foodName;
     self.carbsValueLabel.text = [NSString stringWithFormat:@"%@",self.carbsValue];
     self.proteinValueLabel.text = [NSString stringWithFormat:@"%@",self.proteinValue];
@@ -59,19 +58,79 @@
             
         }else{
             NSLog(@"yes");
-            NSInteger number =[[Database foodList] integerForKey:@"countNr"];
+            NSMutableArray *favorites = [[[Database foodList] objectForKey:@"favorites"] mutableCopy];
             NSArray *food = @[self.foodNameLabel.text,self.proteinValueLabel.text,self.carbsValueLabel.text,self.fatValueLabel.text,self.energiValueLabel.text];
-            number++;
-            [[Database foodList]  setObject:food forKey:[NSString stringWithFormat:@"%d",number]];
-            [[Database foodList]  setInteger:number forKey:@"countNr"];
+            [favorites addObject:food];
+            [[Database foodList] setObject:favorites forKey:@"favorites"];
             [[Database foodList] synchronize];
-            NSLog(@"%d",[[Database foodList]  integerForKey:@"countNr"]);
-        
+            [self saveAnimate];
         }
-  
+        
 
     }
 }
-
+-(void)labelAmination
+{
+    self.foodNameLabel.center = CGPointMake(300, 10);
+    self.carbsValueLabel.center = CGPointMake(300, 10);
+    self.fatValueLabel.center =CGPointMake(300, 10);
+    self.proteinValueLabel.center = CGPointMake(300, 10);
+    self.energiValueLabel.center = CGPointMake(300, 10);
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDelay:0.1];
+    [UIView setAnimationDuration:1.0];
+    self.foodNameLabel.center = CGPointMake(139, 81);
+    [UIView commitAnimations];
+    
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDelay:0.1];
+    [UIView setAnimationDuration:1.0];
+    self.carbsValueLabel.center = CGPointMake(139, 119);
+    [UIView commitAnimations];
+    
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDelay:0.1];
+    [UIView setAnimationDuration:1.0];
+    self.proteinValueLabel.center = CGPointMake(140, 158);
+    [UIView commitAnimations];
+    
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDelay:0.1];
+    [UIView setAnimationDuration:1.0];
+    self.fatValueLabel.center = CGPointMake(140, 196);
+    [UIView commitAnimations];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDelay:0.1];
+    [UIView setAnimationDuration:1.0];
+    self.energiValueLabel.center = CGPointMake(139, 239);
+    [UIView commitAnimations];
+    
+}
+-(void)saveAnimate
+{
+    self.savedLabel.center =CGPointMake(139,0);
+    self.savedLabel.text =@"Saved!";
+    [UIView animateWithDuration:1.0 animations:^{
+        self.savedLabel.center =CGPointMake(139,500);
+    } completion:^(BOOL finished) {
+        
+        [UIView animateWithDuration:1.0 animations:^{
+            self.savedLabel.center =CGPointMake(139,350);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:1.0 animations:^{                
+                self.savedLabel.text =@"";
+            } completion:^(BOOL finished) {
+                
+            }];
+        }];
+    }];
+    
+    
+}
 
 @end
