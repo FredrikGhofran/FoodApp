@@ -113,10 +113,10 @@
     DetailViewController *detailViewController = [segue destinationViewController];
     NSInteger key = [self.tableView indexPathForCell:sender].row;
     detailViewController.foodName = [[Database foodList] objectForKey:@"favorites"][key][0];
-    detailViewController.foodName = [[Database foodList] objectForKey:@"favorites"][key][1];
-    detailViewController.foodName = [[Database foodList] objectForKey:@"favorites"][key][2];
-    detailViewController.foodName = [[Database foodList] objectForKey:@"favorites"][key][3];
-    detailViewController.foodName = [[Database foodList] objectForKey:@"favorites"][key][4];
+    detailViewController.proteinValue = [[Database foodList] objectForKey:@"favorites"][key][1];
+    detailViewController.carbsValue = [[Database foodList] objectForKey:@"favorites"][key][2];
+    detailViewController.fatValue = [[Database foodList] objectForKey:@"favorites"][key][3];
+    detailViewController.energiValue = [[Database foodList] objectForKey:@"favorites"][key][4];
 
 
 }

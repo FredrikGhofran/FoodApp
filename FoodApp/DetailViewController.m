@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *fatValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *energiValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *savedLabel;
+@property(nonatomic)UIDynamicAnimator *animator;
+@property(nonatomic)UIGravityBehavior *gravity;
 @end
 
 @implementation DetailViewController
@@ -34,6 +36,8 @@
     [super viewDidLoad];
 
     [self labelAmination];
+    self.animator = [[UIDynamicAnimator alloc]initWithReferenceView:self.view];
+    self.gravity = [[UIGravityBehavior alloc]initWithItems:@[self.savedLabel]];
     
     self.foodNameLabel.text =self.foodName;
     self.carbsValueLabel.text = [NSString stringWithFormat:@"%@",self.carbsValue];
@@ -113,6 +117,7 @@
 }
 -(void)saveAnimate
 {
+    [self.animator removeAllBehaviors];
     self.savedLabel.center =CGPointMake(139,0);
     self.savedLabel.text =@"Saved!";
     [UIView animateWithDuration:1.0 animations:^{
@@ -120,10 +125,11 @@
     } completion:^(BOOL finished) {
         
         [UIView animateWithDuration:1.0 animations:^{
-            self.savedLabel.center =CGPointMake(139,350);
+            self.savedLabel.center =CGPointMake(139,300);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:1.0 animations:^{                
-                self.savedLabel.text =@"";
+                
+                  [self.animator addBehavior:self.gravity];
             } completion:^(BOOL finished) {
                 
             }];

@@ -18,7 +18,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="77" id="Tyn-e7-oD0" customClass="FoodTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="77" id="Tyn-e7-oD0" customClass="FoodTableViewCell">
                                 <rect key="frame" x="0.0" y="130" width="320" height="77"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tyn-e7-oD0" id="WLg-ip-MQJ">
@@ -338,6 +338,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzr-z4-Gvq">
+                                <rect key="frame" x="20" y="283" width="280" height="212"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -365,12 +369,19 @@
                             <constraint firstItem="Ltn-y6-PXb" firstAttribute="leading" secondItem="dmJ-6h-XcT" secondAttribute="leading" id="zu0-wk-lXr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Favorite food" id="hfY-7l-jc6"/>
+                    <navigationItem key="navigationItem" title="Favorite food" id="hfY-7l-jc6">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="8HZ-0e-JA2">
+                            <connections>
+                                <action selector="takePhoto:" destination="ukb-MN-EjM" id="Ead-Qx-Imh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="carbsValueLabel" destination="DLH-wA-1t6" id="yjv-JX-3O5"/>
                         <outlet property="energiValueLabel" destination="qUE-rg-6ce" id="iDS-fa-mRL"/>
                         <outlet property="fatValueLabel" destination="WLA-V6-9hy" id="4HE-OF-Y66"/>
                         <outlet property="foodNameLabel" destination="iK1-tp-aGI" id="Vve-1f-2h4"/>
+                        <outlet property="photo" destination="gzr-z4-Gvq" id="WQe-zB-bxm"/>
                         <outlet property="proteinValueLabel" destination="yyT-Te-PFU" id="UZd-rv-fBp"/>
                     </connections>
                 </viewController>

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Fredrik Ghofran. All rights reserved.
 //
 
-@interface FavoriteDetailViewController : UIViewController
+@interface FavoriteDetailViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic)NSString *foodName;
 @property(nonatomic)NSNumber *carbsValue;
 @property(nonatomic)NSNumber *proteinValue;

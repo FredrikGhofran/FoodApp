@@ -15,7 +15,10 @@ static NSUserDefaults * _foodList;
 {
     if(!_foodList){
         _foodList = [NSUserDefaults standardUserDefaults];
-        
+        if(![_foodList objectForKey:@"favorites"]){
+            [_foodList setObject:@[] forKey:@"favorites"];
+
+        }
     }
     return _foodList;
 }
