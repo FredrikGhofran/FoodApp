@@ -63,7 +63,7 @@
         }else{
             NSLog(@"yes");
             NSMutableArray *favorites = [[[Database foodList] objectForKey:@"favorites"] mutableCopy];
-            NSArray *food = @[self.foodNameLabel.text,self.proteinValueLabel.text,self.carbsValueLabel.text,self.fatValueLabel.text,self.energiValueLabel.text];
+            NSArray *food = @[self.foodNameLabel.text,self.proteinValueLabel.text,self.carbsValueLabel.text,self.fatValueLabel.text,self.energiValueLabel.text,self.foodNumber];
             [favorites addObject:food];
             [[Database foodList] setObject:favorites forKey:@"favorites"];
             [[Database foodList] synchronize];

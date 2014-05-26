@@ -37,8 +37,8 @@
     
 //   // KOD FÖR ATT RENSA DATABASEN
 //    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-//    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-//    [super viewDidLoad];
+  //  [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    [super viewDidLoad];
     
 //    self.showResult = @[];
 //    self.searchResult = [@[]mutableCopy];
@@ -135,8 +135,18 @@
                     NSNumber *energi = foodObject[@"nutrientValues"][@"energyKcal"];
 
                     [self.foodDictionary setValue:[NSString stringWithFormat:@"%@",energi] forKey:self.food[i]];
-                    [self.foodValuesDictionary setValue:@[foodObject[@"nutrientValues"][@"protein"],foodObject[@"nutrientValues"][@"carbohydrates"],foodObject[@"nutrientValues"][@"fat"]] forKey:json[i][@"name"]];
+                    [self.foodValuesDictionary setValue:@[foodObject[@"nutrientValues"][@"protein"],
+                                                          foodObject[@"nutrientValues"][@"carbohydrates"],
+                                                          foodObject[@"nutrientValues"][@"fat"],
+                                                          json[i][@"number"]]
+                                                 forKey:json[i][@"name"]];
+                    
+                    
                     NSLog(@"%@, protein :%@",json[i][@"name"],energi);
+                    
+                    dispatch_async(dispatch_get_main_queue(),^{
+                        [self.tableView reloadData];
+                    });
                     
                     /*
                     NSLog(@"%@, protein :%@",json[i][@"name"],self.values[json[i][@"name"]][0]);
@@ -201,25 +211,25 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(FoodTableViewCell *)sender
 {
-    FavoriteDetailViewController *favoriteDetailViewController = [segue destinationViewController];
+    DetailViewController *detailViewController = [segue destinationViewController];
     
-    favoriteDetailViewController.foodName = sender.foodNameTextLabel.text;
+    detailViewController.foodName = sender.foodNameTextLabel.text;
    /* NSLog(@"%@ protein: %@",sender.foodNameTextLabel.text,self.values[sender.foodNameTextLabel.text][0]);
     NSLog(@"%@ carbs: %@",sender.foodNameTextLabel.text,self.values[sender.foodNameTextLabel.text][1]);
     NSLog(@"%@ fat: %@",sender.foodNameTextLabel.text,self.values[sender.foodNameTextLabel.text][2]);
     0x8e87040*/
 
     if([sender.foodEnergiTextLabel.text isEqualToString:@"Loading..."]){
-        favoriteDetailViewController.energiValue = @"Not found";
+        detailViewController.energiValue = @"Not found";
     }else{
-        favoriteDetailViewController.energiValue = [self.foodDictionary objectForKey:sender.foodNameTextLabel.text];
+        detailViewController.energiValue = [self.foodDictionary objectForKey:sender.foodNameTextLabel.text];
         
 
     }
-    favoriteDetailViewController.proteinValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][0];
-    favoriteDetailViewController.carbsValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][1];
-    favoriteDetailViewController.fatValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][2];
-
+    detailViewController.proteinValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][0];
+    detailViewController.carbsValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][1];
+    detailViewController.fatValue = self.foodValuesDictionary[sender.foodNameTextLabel.text][2];
+    detailViewController.foodNumber = self.foodValuesDictionary[sender.foodNameTextLabel.text][3];
 }
 //-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 //{

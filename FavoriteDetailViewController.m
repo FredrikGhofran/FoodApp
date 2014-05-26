@@ -81,7 +81,7 @@
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectiory = paths[0];
-    NSString *fullImageName = [NSString stringWithFormat:@"%@.png",name];
+    NSString *fullImageName = [NSString stringWithFormat:@"%@.png",self.foodNumber];
     NSString *imagePath = [documentsDirectiory stringByAppendingPathComponent:fullImageName];
     
     return imagePath;
@@ -92,7 +92,8 @@
     if(self.photo.image){
         
         NSData *imageData = UIImagePNGRepresentation(self.photo.image);
-        BOOL success = [imageData writeToFile:[self imagePath:self.foodNameLabel.text] atomically:NO];
+        NSString *fullPath = [self imagePath:self.foodNameLabel.text];
+        BOOL success = [imageData writeToFile:fullPath atomically:NO];
         
         
         if(success){

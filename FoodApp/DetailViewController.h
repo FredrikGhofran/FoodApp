@@ -9,6 +9,7 @@
 
 @interface DetailViewController : UIViewController<UIAlertViewDelegate>
 @property(nonatomic)NSString *foodName;
+@property(nonatomic)NSString *foodNumber;
 @property(nonatomic)NSNumber *carbsValue;
 @property(nonatomic)NSNumber *proteinValue;
 @property(nonatomic)NSNumber *fatValue;

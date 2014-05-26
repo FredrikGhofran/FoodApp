@@ -10,6 +10,7 @@
 #import "FoodTableViewCell.h"
 #import "Database.h"
 #import "DetailViewController.h"
+#import "FavoriteDetailViewController.h"
 @interface FavoriteTableViewController ()
 
 @end
@@ -110,13 +111,14 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(FoodTableViewCell*)sender
 {
-    DetailViewController *detailViewController = [segue destinationViewController];
+    FavoriteDetailViewController *favoriteDetailViewController = [segue destinationViewController];
     NSInteger key = [self.tableView indexPathForCell:sender].row;
-    detailViewController.foodName = [[Database foodList] objectForKey:@"favorites"][key][0];
-    detailViewController.proteinValue = [[Database foodList] objectForKey:@"favorites"][key][1];
-    detailViewController.carbsValue = [[Database foodList] objectForKey:@"favorites"][key][2];
-    detailViewController.fatValue = [[Database foodList] objectForKey:@"favorites"][key][3];
-    detailViewController.energiValue = [[Database foodList] objectForKey:@"favorites"][key][4];
+    favoriteDetailViewController.foodName = [[Database foodList] objectForKey:@"favorites"][key][0];
+    favoriteDetailViewController.proteinValue = [[Database foodList] objectForKey:@"favorites"][key][1];
+    favoriteDetailViewController.carbsValue = [[Database foodList] objectForKey:@"favorites"][key][2];
+    favoriteDetailViewController.fatValue = [[Database foodList] objectForKey:@"favorites"][key][3];
+    favoriteDetailViewController.energiValue = [[Database foodList] objectForKey:@"favorites"][key][4];
+    favoriteDetailViewController.foodNumber = [[Database foodList] objectForKey:@"favorites"][key][5];
 
 
 }
