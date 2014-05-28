@@ -39,6 +39,9 @@
     self.fatValueLabel.text = [NSString stringWithFormat:@"%@",self.fatValue];
     self.energiValueLabel.text = self.energiValue;
     
+    NSNumber *amunt = @([self.proteinValue intValue]+[self.carbsValue intValue]+[self.fatValue intValue]);
+    
+    self.title = [NSString stringWithFormat:@"Health value: %@",amunt];
 }
 
 - (IBAction)takePhoto:(id)sender {

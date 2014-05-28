@@ -44,6 +44,10 @@
     self.proteinValueLabel.text = [NSString stringWithFormat:@"%@",self.proteinValue];
     self.fatValueLabel.text = [NSString stringWithFormat:@"%@",self.fatValue];
     self.energiValueLabel.text = self.energiValue;
+    
+    NSNumber *amunt = @([self.proteinValue intValue]+[self.carbsValue intValue]+[self.fatValue intValue]);
+    
+    self.title = [NSString stringWithFormat:@"Health value: %@",amunt];
 }
 - (IBAction)saveButtonClick:(id)sender {
         UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"Save food" message:@"Do you wont to save your food to favorites?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
